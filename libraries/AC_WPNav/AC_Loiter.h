@@ -96,6 +96,7 @@ protected:
     AP_Float    _brake_delay_s;         // delay (in seconds) before loiter braking begins after sticks are released
     AP_Float    _speed_terminal_ne_cms; // horizontal terminal speed in cm/s at LOIT_ANG_MAX
     AP_Float    _jerk_max_ne_cmsss;     // maximum jerk of pilot-commanded acceleration that is not braking, cm/s/s/s. Zero disables
+    AP_Float    _stop_jerk_max_cmsss;   // jerk with which braking finishes as the vehicle comes to rest, cm/s/s/s. Zero keeps the default stop
 
     // loiter controller internal variables
     Vector2f    _desired_accel_ne_cmss;     // slewed pilot's desired acceleration in lat/lon frame
