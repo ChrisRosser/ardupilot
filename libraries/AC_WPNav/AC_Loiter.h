@@ -82,6 +82,9 @@ protected:
     // limits the pilot's requested NE acceleration in cm/s/s (LOIT_ACC_MAX, LOIT_BRK_ACCEL/JERK, LOIT_JRK)
     Vector2f limit_pilot_accel_NE_cmss(const Vector2f& request_ne_cmss, float dt);
 
+    // clears the stick and braking hand-off state
+    void reset_pilot_brake_state();
+
     // references and pointers to external libraries
     const AP_AHRS_View&     _ahrs;
     AC_PosControl&          _pos_control;
@@ -108,4 +111,8 @@ protected:
     Vector2f    _pilot_accel_ne_cmss;       // pilot-requested NE acceleration in cm/s/s after the acceleration and jerk limits
     Vector2f    _pilot_request_ne_cmss;     // pilot-requested NE acceleration in cm/s/s straight from the sticks
     uint32_t    _pilot_accel_update_ms;     // time of the last limiter update, used to reset stale limiter state
+    bool        _pilot_stick_active;        // true while the pilot's stick request is non-zero
+    bool        _pilot_request_braking;     // true while the stick request has a component against the direction of travel
+    bool        _pilot_accel_braking;       // true while the limited pilot acceleration has a component against the direction of travel
+    bool        _brake_skip_delay;          // true when the stick was centered mid-brake, so the centered-stick brake starts without LOIT_BRK_DELAY
 };
